@@ -15,7 +15,8 @@
 
   ## Screenshot
   
-  
+  ![alt text](<Screenshot 2025-01-23 at 9.46.38 PM.png>)
+
   ## Installation
 
   None - just download the file!

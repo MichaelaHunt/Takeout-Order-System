@@ -51,15 +51,15 @@ def place_order(menu):
                 i += 1
 
         # Ask customer to input menu item number
-        menu_selection = input("Please select a menu item number.")
+        menu_selection = input("Please select a menu item number.\n")
 
         # Update the order list using the update_order function
         # Send the order list, menu selection, and menu items as arguments
-        update_order(order, menu_selection, menu_items)
+        order = update_order(order, menu_selection, menu_items)
 
         # Ask the customer if they would like to order anything else
         # Let the customer know if they should type 'n' or 'N' to quit
-        order_again = input("Would you like to order anything else? Please input 'N' or 'n' if not.")
+        order_again = input("Would you like to order anything else? Please input 'N' or 'n' if not.\n")
 
         # Write a conditional statement that checks the user's input
         # The conditional statement should check for 'n' or 'N'
@@ -67,10 +67,10 @@ def place_order(menu):
             # Write a print statement that thanks the customer for their order
             print("Thank you for your order!")
 
-            # TODO: Use list comprehension to create a list called prices_list,
-            # TODO: which contains the total prices for each item in the order list:
-            # TODO: The total price for each item should multiply the price by quantity
-            price_list = [] # TODO: return here after class tonight
+            # Use list comprehension to create a list called prices_list,
+            # which contains the total prices for each item in the order list:
+            # The total price for each item should multiply the price by quantity
+            price_list = [float(item["Price"]) * float(item["Quantity"]) for item in order]
 
             # Create an order_total from the prices list using sum()
             # Round the prices to 2 decimal places.
@@ -78,10 +78,11 @@ def place_order(menu):
 
             # Exit the ordering loop
             # Either use a break statement or set the condition to False
-        break
+            break
+        
 
 
-    # TODO: Return the order list and the order total
+    # Return the order list and the order total
     return order, order_total
 
 def update_order(order, menu_selection, menu_items):
@@ -104,14 +105,14 @@ def update_order(order, menu_selection, menu_items):
         # Convert the menu selection to an integer
         menu_selection = int(menu_selection)
 
-        # TODO: Check if the menu selection is in the menu items keys
-        if menu_items.keys().contains(menu_selection):#but its a number?
+        # Check if the menu selection is in the menu items keys
+        if menu_items[menu_selection]:
             # Store the item name as a variable
             item_name = menu_items[menu_selection]["Item name"]
 
             # Ask the customer for the quantity of the menu item
             # Use the item name variable in the question
-            quantity = input(f"Please input a quantity for your {item_name}.")
+            quantity = input(f"Please input a quantity for your {item_name}.\n")
 
             # Check if the quantity is a number, default to 1 if not
             if not quantity.isdigit():
@@ -152,12 +153,16 @@ def print_itemized_receipt(receipt):
                     and quantity ordered.
     """
     # Uncomment the following line if you need to check the structure of the receipt
-    #print(receipt)
+    # print("TEST")
+    # print(receipt)
+    # print("TEST END")
 
     # Loop through the items in the customer's receipt
-    for item_name, price, quantity in receipt:
+    for item in receipt:
         # Store the dictionary items as variables
-        
+        item_name = item["Item Name"]
+        price = item["Price"]
+        quantity = item["Quantity"]
 
         # Print the receipt line using the print_receipt_line function
         # Send the item name, price, and quantity as separate arguments
